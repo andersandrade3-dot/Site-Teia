@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEIA 2026 — O Futuro Conectado</title>
+  <meta name="description" content="TEIA 2026 — Experiência imersiva de tecnologia, inovação e protagonismo. EEMTI Maria Alice Ramos Gomes, Acaraú-CE." />
+  
+  <!-- Favicon Oficial (Logo do Instagram TEIA 2026) -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2026" />
+  <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32x32.png?v=2026" />
+  <link rel="icon" type="image/png" sizes="192x192" href="imagens/favicon-192x192.png?v=2026" />
+  <link rel="apple-touch-icon" sizes="180x180" href="imagens/apple-touch-icon.png?v=2026" />
+  <link rel="shortcut icon" href="favicon.ico?v=2026" />
+
+  <!-- Fonts: Syne & Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Canvas WebGL 3D Persistente (Logo 3D Coreografada + Globo Neural) -->
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+
+  <!-- Custom Cursor Fluido -->
+  <div id="cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+    <div class="cursor-label">INTERAJA</div>
+  </div>
+
+  <!-- Header / Navigation Minimalista e Responsivo -->
+  <header class="header">
+    <a href="#hero" class="brand" aria-label="Ir para o topo">
+      <img src="imagens/logo_transparent.png" alt="Logo TEIA 2026" class="brand-logo" />
+    </a>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <nav class="nav" id="mainNav">
+      <a href="#manifesto" class="nav-item">01 // VISÃO</a>
+      <a href="#circuitos" class="nav-item">02 // CIRCUITOS</a>
+      <a href="#cronograma" class="nav-item">03 // CRONOGRAMA</a>
+      <a href="#camisa" class="nav-item">04 // CAMISA 3D</a>
+      <a href="#escolas" class="nav-item">05 // 4 ESCOLAS</a>
+      <a href="#equipe" class="nav-item">06 // A TEIA</a>
+      <a href="#data" class="nav-btn">23 OUT</a>
+    </nav>
+  </header>
+
+  <!-- Indicador Lateral de Progresso -->
+  <div class="scroll-tracker" aria-hidden="true">
+    <div class="tracker-line"><div class="tracker-bar"></div></div>
+    <span class="tracker-phase">01 / 07</span>
+  </div>
+
+  <!-- MAIN SCROLL CONTAINER -->
+  <main class="viewport">
+
+    <!-- 01 // HERO STAGE (LOGO NO FUNDO PRETO À ESQUERDA + GLOBO 3D À DIREITA) -->
+    <section id="hero" class="scene scene-hero" data-stage="0">
+      <div class="scene-inner hero-split-layout">
+        
+        <!-- Coluna da Identidade Oficial (Fundo Preto Absoluto) -->
+        <div class="hero-brand-column">
+          <div class="hero-top-minimal">
+            <span class="tag-status"></span>
+            <span class="hero-tag-txt">EEMTI MARIA ALICE RAMOS GOMES &bull; ACARAÚ-CE</span>
+          </div>
+
+          <div class="hero-logo-wrapper">
+            <img src="imagens/logo_transparent.png" alt="Logo Oficial TEIA 2026" class="hero-identity-logo" id="heroIdentityLogo" />
+          </div>
+
+          <div class="hero-info-group">
+            <p class="hero-tagline-official">TECNOLOGIA &bull; EDUCAÇÃO &bull; INOVAÇÃO &bull; APRENDIZAGEM</p>
+            <div class="hero-event-meta">
+              <span class="meta-badge">23 DE OUTUBRO DE 2026</span>
+              <span class="meta-dot">&bull;</span>
+              <span>CURSO TÉCNICO EM INFORMÁTICA</span>
+            </div>
+          </div>
+
+          <div class="hero-btn-cluster">
+            <a href="#circuitos" class="cta-pill cta-primary">EXPLORAR CIRCUITOS</a>
+            <a href="#cronograma" class="cta-pill cta-glass">CRONOGRAMA</a>
+            <a href="#camisa" class="cta-pill cta-glass">CAMISA 3D</a>
+          </div>
+        </div>
+
+        <!-- Coluna do Globo 3D (Área Aberta e Interativa) -->
+        <div class="hero-globe-column">
+          <div class="hero-drag-prompt">
+            <span class="mouse-icon"></span>
+            <span>ARRASTE PARA GIRAR O GLOBO 3D &rarr;</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 02 // MANIFESTO (VISÃO & IMPACTO) -->
+    <section id="manifesto" class="scene scene-manifesto" data-stage="1">
+      <div class="scene-inner">
+        <span class="scene-number">01 // VISÃO</span>
+        <h2 class="manifesto-big">
+          NÃO É APENAS UM EVENTO.<br/>
+          É UMA <span class="glow-red">REDE VIVA.</span>
+        </h2>
+        <div class="manifesto-stats">
+          <div class="stat-block">
+            <span class="stat-num" data-val="3">3</span>
+            <span class="stat-txt">CIRCUITOS IMERSIVOS</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num" data-val="2">2</span>
+            <span class="stat-txt">OFICINAS PRÁTICAS</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num" data-val="4">4</span>
+            <span class="stat-txt">ESCOLAS CONVIDADAS</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num" data-val="31">31</span>
+            <span class="stat-txt">PROTAGONISTAS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 // CIRCUITOS (MONÓLITOS INTERATIVOS) -->
+    <section id="circuitos" class="scene scene-circuitos" data-stage="2">
+      <div class="scene-inner">
+        <div class="section-lead">
+          <span class="scene-number">02 // EXPERIÊNCIAS</span>
+          <h2 class="scene-headline">TRÊS DIMENSÕES DA TECNOLOGIA.</h2>
+          <p class="scene-sub">Toque ou passe o mouse nos monólitos para emitir pulsos diretos ao núcleo neural 3D.</p>
+        </div>
+
+        <div class="monolith-grid">
+          <!-- Monólito 01 -->
+          <article class="monolith" data-core-mode="hardware" tabindex="0">
+            <div class="monolith-top">
+              <span class="mono-id">01</span>
+              <span class="mono-tag">CIRCUITO</span>
+            </div>
+            <h3 class="mono-title">HARDWARE</h3>
+            <p class="mono-desc">Desmontagem, arquitetura de componentes, placas-mãe e montagem de PC ao vivo.</p>
+            <div class="mono-bottom">
+              <span class="mono-space">SALA &bull; CORREDOR</span>
+              <span class="mono-arrow">&rarr;</span>
+            </div>
+          </article>
+
+          <!-- Monólito 02 -->
+          <article class="monolith" data-core-mode="code" tabindex="0">
+            <div class="monolith-top">
+              <span class="mono-id">02</span>
+              <span class="mono-tag">CIRCUITO</span>
+            </div>
+            <h3 class="mono-title">CÓDIGO</h3>
+            <p class="mono-desc">Portugol Studio, algoritmos executados e o desafio do pensamento lógico.</p>
+            <div class="mono-bottom">
+              <span class="mono-space">LAB. INFORMÁTICA</span>
+              <span class="mono-arrow">&rarr;</span>
+            </div>
+          </article>
+
+          <!-- Monólito 03 -->
+          <article class="monolith" data-core-mode="robotics" tabindex="0">
+            <div class="monolith-top">
+              <span class="mono-id">03</span>
+              <span class="mono-tag">CIRCUITO</span>
+            </div>
+            <h3 class="mono-title">ROBÓTICA</h3>
+            <p class="mono-desc">Controle de carrinhos na pista, motores DC, engrenagens e montagem reversa.</p>
+            <div class="mono-bottom">
+              <span class="mono-space">SALA DE REDAÇÃO</span>
+              <span class="mono-arrow">&rarr;</span>
+            </div>
+          </article>
+
+          <!-- Monólito Oficina -->
+          <article class="monolith monolith-special" data-core-mode="ia" tabindex="0">
+            <div class="monolith-top">
+              <span class="mono-id">IA</span>
+              <span class="mono-tag">OFICINA DA TARDE</span>
+            </div>
+            <h3 class="mono-title">WEB COM IA</h3>
+            <p class="mono-desc">Desenvolva sua primeira aplicação web moderna com apoio de inteligência artificial.</p>
+            <div class="mono-bottom">
+              <span class="mono-space">LAB. INFORMÁTICA</span>
+              <span class="mono-arrow">&rarr;</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 // CRONOGRAMA & PROGRAMAÇÃO OFICIAL -->
+    <section id="cronograma" class="scene scene-cronograma" data-stage="3">
+      <div class="scene-inner">
+        <div class="section-lead">
+          <span class="scene-number">03 // AGENDA DO DIA</span>
+          <h2 class="scene-headline">CRONOGRAMA DE ATIVIDADES.</h2>
+          <p class="scene-sub">Todo o roteiro planejado para 23 de Outubro de 2026. Selecione o turno para filtrar.</p>
+        </div>
+
+        <!-- Filtros do Cronograma -->
+        <div class="crono-filter-bar" role="tablist">
+          <button class="crono-tab active" data-period="all">DIA COMPLETO</button>
+          <button class="crono-tab" data-period="morning">MANHÃ (08h20 – 12h00)</button>
+          <button class="crono-tab" data-period="afternoon">TARDE (13h20 – 16h00)</button>
+        </div>
+
+        <!-- Grade de Atividades do Cronograma -->
+        <div class="crono-timeline-list" id="cronoTimelineList">
+          
+          <!-- Item 1 -->
+          <div class="crono-item" data-period="morning">
+            <div class="crono-time-col">
+              <span class="crono-hour">08h20 — 08h40</span>
+              <span class="crono-badge badge-morning">MANHÃ</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Recepção &amp; Credenciamento</h3>
+                <span class="crono-local">Entrada &bull; Auditório</span>
+              </div>
+              <p class="crono-desc">Acolhida calorosa das 4 escolas convidadas, distribuição dos crachás oficiais e entrega dos folhetos informativos com o mapa de atividades.</p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="crono-item" data-period="morning">
+            <div class="crono-time-col">
+              <span class="crono-hour">08h40 — 09h10</span>
+              <span class="crono-badge badge-morning">MANHÃ</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Cerimonial de Abertura &amp; Música</h3>
+                <span class="crono-local">Auditório Principal</span>
+              </div>
+              <p class="crono-desc">Boas-vindas da coordenação do curso, apresentação geral da proposta TEIA 2026 e apresentação musical artística de Jaiane.</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="crono-item" data-period="morning">
+            <div class="crono-time-col">
+              <span class="crono-hour">09h10 — 09h30</span>
+              <span class="crono-badge badge-morning">MANHÃ</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Intervalo &amp; Convivência Matutina</h3>
+                <span class="crono-local">Pátio Escolar</span>
+              </div>
+              <p class="crono-desc">Momento de coffee break, interação entre os estudantes do 9º ano e a comunidade escolar da EEMTI Maria Alice.</p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="crono-item" data-period="morning">
+            <div class="crono-time-col">
+              <span class="crono-hour">09h30 — 10h20</span>
+              <span class="crono-badge badge-morning">MANHÃ</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Circuito 1 — Hardware &amp; Montagem de PC</h3>
+                <span class="crono-local">Corredor Principal &bull; Sala de Aula</span>
+              </div>
+              <p class="crono-desc">Linha do tempo dos computadores, demonstração dos componentes físicos, painéis de carreira em TI e desmontagem/montagem de computador na prática.</p>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="crono-item" data-period="morning">
+            <div class="crono-time-col">
+              <span class="crono-hour">10h20 — 12h00</span>
+              <span class="crono-badge badge-morning">MANHÃ</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Circuitos 2 &amp; 3 em Paralelo (Código e Robótica)</h3>
+                <span class="crono-local">Lab. Informática &bull; Sala de Redação</span>
+              </div>
+              <p class="crono-desc">Turmas divididas simultaneamente: Grupo A vivencia Programação &amp; Lógica (Portugol Studio e Desafio da Torre), Grupo B vivencia Robótica e Pista de Carrinhos. Às 11h10 ocorre a inversão das turmas.</p>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="crono-item" data-period="morning">
+            <div class="crono-time-col">
+              <span class="crono-hour">12h00 — 13h20</span>
+              <span class="crono-badge badge-neutral">INTERVALO</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Almoço &amp; Integração</h3>
+                <span class="crono-local">Refeitório Escolar</span>
+              </div>
+              <p class="crono-desc">Almoço servido a todos os estudantes das 4 escolas convidadas, professores acompanhantes e equipe técnica organizadora.</p>
+            </div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="crono-item" data-period="afternoon">
+            <div class="crono-time-col">
+              <span class="crono-hour">13h20 — 13h40</span>
+              <span class="crono-badge badge-afternoon">TARDE</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Retorno, Vídeo &amp; Apresentação das Oficinas</h3>
+                <span class="crono-local">Auditório Principal</span>
+              </div>
+              <p class="crono-desc">Exibição do teaser audiovisual e direcionamento dos estudantes para a escolha da oficina prática do período vespertino.</p>
+            </div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="crono-item" data-period="afternoon">
+            <div class="crono-time-col">
+              <span class="crono-hour">13h40 — 15h00</span>
+              <span class="crono-badge badge-afternoon">TARDE</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Oficinas Práticas TEIA — Mão na Massa</h3>
+                <span class="crono-local">Sala de Redação &bull; Lab. Informática</span>
+              </div>
+              <p class="crono-desc">Dois caminhos imersivos: Oficina de Robótica Aplicada ou Oficina de Criação Web com Inteligência Artificial para os visitantes desenvolverem seus próprios projetos.</p>
+            </div>
+          </div>
+
+          <!-- Item 9 -->
+          <div class="crono-item" data-period="afternoon">
+            <div class="crono-time-col">
+              <span class="crono-hour">15h00 — 15h20</span>
+              <span class="crono-badge badge-afternoon">TARDE</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Intervalo &amp; Lanche da Tarde</h3>
+                <span class="crono-local">Pátio Escolar</span>
+              </div>
+              <p class="crono-desc">Pausa revigorante e recarga de energias antes do grande desafio final de encerramento.</p>
+            </div>
+          </div>
+
+          <!-- Item 10 -->
+          <div class="crono-item" data-period="afternoon">
+            <div class="crono-time-col">
+              <span class="crono-hour">15h20 — 15h50</span>
+              <span class="crono-badge badge-afternoon">TARDE</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Desafio TEIA — Competição entre as 4 Escolas</h3>
+                <span class="crono-local">Auditório Principal</span>
+              </div>
+              <p class="crono-desc">Batalha interativa e gamificada de raciocínio, lógica e conhecimentos tecnológicos disputada entre equipes das 4 escolas convidadas.</p>
+            </div>
+          </div>
+
+          <!-- Item 11 -->
+          <div class="crono-item" data-period="afternoon">
+            <div class="crono-time-col">
+              <span class="crono-hour">15h50 — 16h00</span>
+              <span class="crono-badge badge-afternoon">TARDE</span>
+            </div>
+            <div class="crono-content-card">
+              <div class="crono-header">
+                <h3 class="crono-title">Encerramento Oficial &amp; Premiação</h3>
+                <span class="crono-local">Auditório Principal</span>
+              </div>
+              <p class="crono-desc">Entrega de premiações aos vencedores do Desafio TEIA, fotos oficiais da edição 2026, certificação e agradecimento às delegações.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 // A CAMISA 3D OFICIAL (WEBGL INTERATIVO COM COSTURA SOLDADA) -->
+    <section id="camisa" class="scene scene-camisa" data-stage="4">
+      <div class="scene-inner">
+        <div class="section-lead text-center">
+          <span class="scene-number">04 // ARMADURA</span>
+          <h2 class="scene-headline">A CAMISA OFICIAL 3D.</h2>
+          <p class="scene-sub">Modelo tridimensional unificado e ajustado em Three.js. Arraste para inspecionar em 360°, role para zoom ou use os botões.</p>
+        </div>
+
+        <div class="camisa-3d-wrapper">
+          <div class="camisa-viewport-card">
+            <iframe src="imagens/Camisa TEIA 2026 — 3D.html" title="Modelo 3D da Camisa Oficial TEIA 2026" class="camisa-3d-iframe" loading="lazy"></iframe>
+          </div>
+          <div class="camisa-controls-note">
+            <span>[ ARRASTE COM O MOUSE OU TOQUE PARA ROTACIONAR LIVREMENTE ]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 // AS 4 ESCOLAS CONVIDADAS -->
+    <section id="escolas" class="scene scene-escolas" data-stage="5">
+      <div class="scene-inner">
+        <div class="section-lead">
+          <span class="scene-number">05 // INTEGRAÇÃO REGIONAL</span>
+          <h2 class="scene-headline">AS 4 ESCOLAS CONVIDADAS.</h2>
+          <p class="scene-sub">Estudantes do 9º ano que participam das vivências, circuitos práticos e do Desafio TEIA 2026.</p>
+        </div>
+
+        <div class="escolas-grid">
+          
+          <!-- Escola 1 -->
+          <div class="escola-card">
+            <div class="escola-num">01</div>
+            <div class="escola-badge">ESCOLA CONVIDADA</div>
+            <h3 class="escola-name">EEF Deputado José Filomeno</h3>
+            <p class="escola-info">Participação ativa das turmas de 9º ano nos circuitos de hardware, código, robótica e na competição regional.</p>
+            <div class="escola-meta">
+              <span>9º ANO</span>
+              <span>ACARAÚ — CE</span>
+            </div>
+          </div>
+
+          <!-- Escola 2 -->
+          <div class="escola-card">
+            <div class="escola-num">02</div>
+            <div class="escola-badge">ESCOLA CONVIDADA</div>
+            <h3 class="escola-name">EEF Professora Francisca Silveira</h3>
+            <p class="escola-info">Vivência prática no laboratório com Portugol Studio, eletrônica e nas oficinas de desenvolvimento web com IA.</p>
+            <div class="escola-meta">
+              <span>9º ANO</span>
+              <span>ACARAÚ — CE</span>
+            </div>
+          </div>
+
+          <!-- Escola 3 -->
+          <div class="escola-card">
+            <div class="escola-num">03</div>
+            <div class="escola-badge">ESCOLA CONVIDADA</div>
+            <h3 class="escola-name">EEF Professora Teresa de Jesus</h3>
+            <p class="escola-info">Contato com a montagem ao vivo de computadores, arquitetura de placas e pilotagem na pista de robôs.</p>
+            <div class="escola-meta">
+              <span>9º ANO</span>
+              <span>ACARAÚ — CE</span>
+            </div>
+          </div>
+
+          <!-- Escola 4 -->
+          <div class="escola-card">
+            <div class="escola-num">04</div>
+            <div class="escola-badge">ESCOLA CONVIDADA</div>
+            <h3 class="escola-name">EEF Professora Joelina Ribeiro Ramos</h3>
+            <p class="escola-info">Imersão completa no ambiente técnico profissional e disputa pelo troféu no Desafio TEIA entre escolas.</p>
+            <div class="escola-meta">
+              <span>9º ANO</span>
+              <span>ACARAÚ — CE</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sede Realizadora -->
+        <div class="escola-sede-card">
+          <div class="sede-badge">ESCOLA SEDE &amp; REALIZADORA</div>
+          <div class="sede-body">
+            <div>
+              <h3 class="sede-name">EEMTI Maria Alice Ramos Gomes</h3>
+              <p class="sede-desc">Acaraú — Ceará &bull; Curso Técnico em Informática. Ambiente de protagonismo juvenil, inovação e acolhida de 120 a 160 visitantes.</p>
+            </div>
+            <div class="sede-tag-box">
+              <span class="sede-tag-val">1º ANO</span>
+              <span class="sede-tag-lbl">TÉCNICO EM INFORMÁTICA</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 07 // A TEIA — QUEM FAZ ACONTECER (EDITORIAL MINIMALISTA) -->
+    <section id="equipe" class="scene scene-equipe" data-stage="6">
+      <div class="scene-inner">
+        <div class="section-lead">
+          <span class="scene-number">06 // PROTAGONISMO</span>
+          <h2 class="scene-headline">QUEM FAZ ACONTECER.</h2>
+          <p class="scene-sub">Os talentos do Curso Técnico em Informática que conduzem o evento.</p>
+        </div>
+
+        <!-- Destaque Coordenação -->
+        <div class="coord-minimal">
+          <div class="coord-avatar">RA</div>
+          <div class="coord-info">
+            <span class="coord-title">COORDENAÇÃO GERAL // IDEALIZAÇÃO</span>
+            <h3 class="coord-fullname">Prof. Raimundo Anderson Andrade</h3>
+            <p class="coord-role-txt">Coordenador do Curso Técnico em Informática · EEMTI Maria Alice Ramos Gomes</p>
+          </div>
+        </div>
+
+        <!-- Filtros Rápidos da Equipe -->
+        <div class="crew-filters" role="tablist">
+          <button class="crew-pill active" data-filter="all">TODOS (31)</button>
+          <button class="crew-pill" data-filter="cerimonial">APRESENTAÇÃO</button>
+          <button class="crew-pill" data-filter="hardware">HARDWARE</button>
+          <button class="crew-pill" data-filter="programacao">CÓDIGO</button>
+          <button class="crew-pill" data-filter="robotica">ROBÓTICA</button>
+          <button class="crew-pill" data-filter="webia">WEB &amp; IA</button>
+        </div>
+
+        <!-- Grid de Badges High-End (Nomes 100% nítidos e sólidos) -->
+        <div class="crew-stream" id="crewStream">
+          <!-- Gerado via JS com visual minimalista de alta tecnologia -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 // DATA & CONTAGEM REGRESSIVA -->
+    <section id="data" class="scene scene-data" data-stage="7">
+      <div class="scene-inner">
+        <span class="scene-number text-center">07 // O DESTINO</span>
+        <div class="countdown-stage">
+          <h2 class="date-massive">23 . 10 . 2026</h2>
+          <div class="countdown-stream">
+            <div class="cd-box"><span class="cd-num" id="d-val">00</span><span class="cd-lbl">DIAS</span></div>
+            <span class="cd-sep">:</span>
+            <div class="cd-box"><span class="cd-num" id="h-val">00</span><span class="cd-lbl">HORAS</span></div>
+            <span class="cd-sep">:</span>
+            <div class="cd-box"><span class="cd-num" id="m-val">00</span><span class="cd-lbl">MIN</span></div>
+            <span class="cd-sep">:</span>
+            <div class="cd-box"><span class="cd-num" id="s-val">00</span><span class="cd-lbl">SEG</span></div>
+          </div>
+          <p class="date-sub">EEMTI MARIA ALICE RAMOS GOMES · ACARAÚ — CEARÁ</p>
+        </div>
+
+        <!-- Footer Integrado -->
+        <footer class="footer-minimal">
+          <img src="imagens/logo_transparent.png" alt="Logo TEIA 2026" class="footer-logo" />
+          <p class="footer-copy">TEIA 2026 &copy; TECNOLOGIA &bull; EDUCAÇÃO &bull; INOVAÇÃO &bull; APRENDIZAGEM</p>
+          <a href="#hero" class="back-top">&uarr; TOPO</a>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal Detalhes do Integrante -->
+  <div class="crew-modal" id="crewModal" role="dialog" aria-modal="true" hidden>
+    <div class="crew-modal-card">
+      <button class="modal-x" id="modalX" aria-label="Fechar">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
