@@ -534,23 +534,32 @@
           <div class="coord-info">
             <span class="coord-title">COORDENAÇÃO GERAL // IDEALIZAÇÃO</span>
             <h3 class="coord-fullname">Prof. Raimundo Anderson Andrade</h3>
-            <p class="coord-role-txt">Coordenador do Curso Técnico em Informática · EEMTI Maria Alice Ramos Gomes</p>
+            <p class="coord-role-txt">Coordenador do Curso Técnico em Informática &bull; EEMTI Maria Alice Ramos Gomes</p>
           </div>
         </div>
 
-        <!-- Filtros Rápidos da Equipe -->
-        <div class="crew-filters" role="tablist">
-          <button class="crew-pill active" data-filter="all">TODOS (31)</button>
-          <button class="crew-pill" data-filter="cerimonial">APRESENTAÇÃO</button>
-          <button class="crew-pill" data-filter="hardware">HARDWARE</button>
-          <button class="crew-pill" data-filter="programacao">CÓDIGO</button>
-          <button class="crew-pill" data-filter="robotica">ROBÓTICA</button>
-          <button class="crew-pill" data-filter="webia">WEB &amp; IA</button>
-        </div>
+        <!-- Botão Toggle Mobile (aparece no celular para recolher os nomes e não esticar a página) -->
+        <button class="crew-mobile-toggle" id="crewToggleBtn" aria-expanded="false" aria-controls="crewCollapseWrap">
+          <span class="crew-toggle-text">VER OS 31 ALUNOS DA EQUIPE</span>
+          <span class="crew-toggle-icon">▾</span>
+        </button>
 
-        <!-- Grid de Badges High-End (Nomes 100% nítidos e sólidos) -->
-        <div class="crew-stream" id="crewStream">
-          <!-- Gerado via JS com visual minimalista de alta tecnologia -->
+        <!-- Container Expansível de Integrantes -->
+        <div class="crew-collapse-wrap" id="crewCollapseWrap">
+          <!-- Filtros Rápidos da Equipe -->
+          <div class="crew-filters" role="tablist">
+            <button class="crew-pill active" data-filter="all">TODOS (31)</button>
+            <button class="crew-pill" data-filter="cerimonial">APRESENTAÇÃO</button>
+            <button class="crew-pill" data-filter="hardware">HARDWARE</button>
+            <button class="crew-pill" data-filter="programacao">CÓDIGO</button>
+            <button class="crew-pill" data-filter="robotica">ROBÓTICA</button>
+            <button class="crew-pill" data-filter="webia">WEB &amp; IA</button>
+          </div>
+
+          <!-- Grid de Badges High-End (Nomes 100% nítidos e sólidos) -->
+          <div class="crew-stream" id="crewStream">
+            <!-- Gerado via JS com visual minimalista de alta tecnologia -->
+          </div>
         </div>
       </div>
     </section>

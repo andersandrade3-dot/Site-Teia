@@ -518,6 +518,21 @@ let triggerEnergyBurst = null;
     if (e.key === 'Escape' && modal && !modal.hidden) closeModal();
   });
 
+  // Toggle expansível dos alunos no mobile
+  const crewToggleBtn = $('#crewToggleBtn');
+  const crewCollapseWrap = $('#crewCollapseWrap');
+  if (crewToggleBtn && crewCollapseWrap) {
+    crewToggleBtn.addEventListener('click', () => {
+      const isOpen = crewCollapseWrap.classList.toggle('open');
+      crewToggleBtn.classList.toggle('active', isOpen);
+      crewToggleBtn.setAttribute('aria-expanded', isOpen);
+      const textSpan = crewToggleBtn.querySelector('.crew-toggle-text');
+      if (textSpan) {
+        textSpan.textContent = isOpen ? 'RECOLHER LISTA DE ALUNOS' : 'VER OS 31 ALUNOS DA EQUIPE';
+      }
+    });
+  }
+
   render();
 })();
 
