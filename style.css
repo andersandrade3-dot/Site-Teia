@@ -159,23 +159,6 @@ body.cursor-active .cursor-label {
   transform: scale(1.05);
 }
 
-.header-coords {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  color: var(--white-dim);
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.coord-dot {
-  width: 5px;
-  height: 5px;
-  background: var(--red-neon);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--red-neon);
-}
 
 .nav {
   display: flex;
@@ -1479,7 +1462,6 @@ body.cursor-active .cursor-label {
 }
 
 @media (max-width: 900px) {
-  .header-coords { display: none; }
   .header { padding: 1rem 2rem; }
 
   .scene-hero {
