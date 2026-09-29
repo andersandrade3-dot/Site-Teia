@@ -279,6 +279,7 @@ body.cursor-active .cursor-label {
   display: flex;
   align-items: center;
   padding: 8rem 4rem;
+  scroll-margin-top: 80px;
 }
 
 .scene-inner {
@@ -624,7 +625,7 @@ body.cursor-active .cursor-label {
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 2.2rem 1.8rem;
+  padding: 2.2rem 1.4rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -683,15 +684,16 @@ body.cursor-active .cursor-label {
 
 .mono-title {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: clamp(1.3rem, 1.55vw, 1.7rem);
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
-  margin-top: 2rem;
+  margin-top: 1.6rem;
   margin-bottom: 0.8rem;
   position: relative;
   z-index: 2;
   color: #ffffff;
+  white-space: nowrap;
 }
 
 .mono-desc {
@@ -722,13 +724,33 @@ body.cursor-active .cursor-label {
 }
 
 .mono-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 30, 66, 0.08);
+  border: 1px solid rgba(255, 30, 66, 0.25);
   color: var(--red-neon);
-  font-size: 1.2rem;
-  transition: transform 0.3s;
+  font-size: 1.15rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-lusion);
+  z-index: 5;
+}
+
+.mono-arrow:hover {
+  background: var(--red-neon);
+  color: #ffffff;
+  border-color: var(--red-neon);
+  transform: translateX(4px) scale(1.1);
+  box-shadow: 0 0 16px rgba(255, 30, 66, 0.6);
 }
 
 .monolith:hover .mono-arrow {
-  transform: translateX(5px);
+  border-color: rgba(255, 30, 66, 0.5);
+  transform: translateX(3px);
 }
 
 .monolith-special {
@@ -1455,8 +1477,8 @@ body.cursor-active .cursor-label {
   .camisa-viewport-card { height: 420px; }
 }
 
-@media (max-width: 1200px) {
-  .monolith-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1280px) {
+  .monolith-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   .manifesto-stats { grid-template-columns: repeat(2, 1fr); }
   .scene { padding: 7rem 3rem; }
 }

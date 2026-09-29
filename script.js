@@ -283,6 +283,14 @@ let triggerEnergyBurst = null;
       redLight.intensity = 4.2;
       innerMat.emissive.setHex(0x5a000d);
     });
+    m.addEventListener('click', (e) => {
+      if (!e.target.closest('a')) {
+        const crono = document.getElementById('cronograma');
+        if (crono) {
+          crono.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
   });
 
   /* -------------------------------------------------------------
