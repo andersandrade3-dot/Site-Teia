@@ -28,6 +28,7 @@
 }
 
 html {
+  background-color: var(--bg);
   background: var(--bg);
   color: var(--white);
   font-family: var(--font-body);
@@ -37,6 +38,7 @@ html {
 }
 
 body {
+  background-color: var(--bg);
   background: var(--bg);
   overflow-x: hidden;
   cursor: none;
@@ -949,16 +951,22 @@ body.cursor-active .cursor-label {
   color: var(--white-dim);
 }
 
-/* ─── SCENE 06 // AS 4 ESCOLAS CONVIDADAS ─── */
+/* ─── SCENE 06 // AS 5 ESCOLAS CONVIDADAS ─── */
 .scene-escolas {
   padding: 10rem 4rem;
 }
 
 .escolas-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.6rem;
   margin-bottom: 2.5rem;
+}
+
+@media (min-width: 1400px) {
+  .escolas-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 .escola-card {
@@ -1381,16 +1389,26 @@ body.cursor-active .cursor-label {
   border-color: var(--red-neon);
 }
 
-/* ─── MODAL INTEGRANTE ─── */
+/* ─── MODAL INTEGRANTE (HUD CYBERPUNK HIGH-END) ─── */
 .crew-modal {
   position: fixed;
   inset: 0;
-  z-index: 2000;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.88);
-  backdrop-filter: blur(20px);
+  background: rgba(3, 3, 3, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease-lusion);
+  padding: 1.5rem;
+}
+
+.crew-modal.open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .crew-modal[hidden] {
@@ -1398,61 +1416,101 @@ body.cursor-active .cursor-label {
 }
 
 .crew-modal-card {
-  background: #0d0d0d;
+  background: #0c080a;
   border: 1px solid var(--border-red);
-  border-radius: 6px;
-  padding: 2.5rem;
-  max-width: 480px;
-  width: 90vw;
+  border-radius: 8px;
+  padding: 2.6rem 2.2rem;
+  max-width: 500px;
+  width: 100%;
   position: relative;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 50px rgba(255, 30, 66, 0.3);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.98), 0 0 50px rgba(255, 30, 66, 0.28);
+  transform: scale(0.95);
+  transition: transform 0.25s var(--ease-lusion);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.crew-modal.open .crew-modal-card {
+  transform: scale(1);
 }
 
 .modal-x {
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
+  background: rgba(255, 30, 66, 0.1);
+  border: 1px solid rgba(255, 30, 66, 0.3);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
   color: var(--white);
   cursor: pointer;
-  transition: color 0.2s;
+  transition: all 0.25s ease;
   line-height: 1;
 }
 
 .modal-x:hover {
-  color: var(--red-neon);
+  background: var(--red-neon);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 30, 66, 0.6);
+  transform: rotate(90deg);
 }
 
 .modal-hud-id {
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.72rem;
+  font-weight: 700;
   color: var(--red-neon);
   letter-spacing: 0.15em;
-  margin-bottom: 0.5rem;
+  background: rgba(255, 30, 66, 0.12);
+  border: 1px solid rgba(255, 30, 66, 0.35);
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 0.9rem;
 }
 
 .modal-hud-name {
   font-family: var(--font-display);
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   font-weight: 900;
   letter-spacing: -0.01em;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.35rem;
   color: #ffffff;
+  text-shadow: 0 0 30px rgba(255, 30, 66, 0.4);
 }
 
 .modal-hud-role {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--white-dim);
-  margin-bottom: 1.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--red-neon);
+  margin-bottom: 1.3rem;
+  letter-spacing: 0.05em;
+}
+
+.modal-hud-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--red-neon) 0%, rgba(255, 30, 66, 0.2) 65%, transparent 100%);
+  margin-bottom: 1.3rem;
+}
+
+.modal-hud-desc {
+  font-size: 0.98rem;
+  color: var(--white);
+  line-height: 1.65;
+  margin-bottom: 1.4rem;
 }
 
 .modal-hud-row {
-  border-left: 2px solid var(--red-neon);
-  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--red-neon);
+  padding: 0.85rem 1.1rem;
   background: rgba(255, 255, 255, 0.04);
+  border-radius: 0 6px 6px 0;
   margin-bottom: 1rem;
 }
 
@@ -1460,21 +1518,63 @@ body.cursor-active .cursor-label {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
   margin-bottom: 0.3rem;
 }
 
 .modal-hud-val {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: #ffffff;
   line-height: 1.5;
+}
+
+.modal-hud-school {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.9rem;
+}
+
+.modal-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 30, 66, 0.12);
+  border: 1px solid var(--red-neon);
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-lusion);
+  box-shadow: 0 0 20px rgba(255, 30, 66, 0.25);
+}
+
+.modal-back-btn:hover {
+  background: var(--red-neon);
+  color: #ffffff;
+  box-shadow: 0 0 35px rgba(255, 30, 66, 0.7);
+  transform: translateY(-2px);
+}
+
+.modal-back-btn:active {
+  transform: translateY(0);
 }
 
 /* ─── RESPONSIVIDADE TOTAL (CELULAR, TABLET, DESKTOP) ─── */
 
 @media (max-width: 1200px) {
-  .escolas-grid { grid-template-columns: repeat(2, 1fr); }
+  .escolas-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .crono-item { grid-template-columns: 160px 1fr; gap: 1.5rem; }
 }
 
@@ -1579,7 +1679,8 @@ body.cursor-active .cursor-label {
     pointer-events: auto;
   }
   
-  .nav.open {
+  .nav.open,
+  .nav.nav-open {
     transform: translateY(0);
   }
   
@@ -1665,4 +1766,27 @@ body.cursor-active .cursor-label {
   .date-massive { font-size: clamp(1.7rem, 8vw, 2.4rem); letter-spacing: -0.02em; }
   .cd-num { font-size: clamp(1.8rem, 6vw, 2.4rem); }
   .cd-sep { font-size: 1.4rem; }
+
+  /* Modal no celular pequeno */
+  .crew-modal {
+    padding: 1rem 0.75rem;
+  }
+  .crew-modal-card {
+    padding: 2rem 1.4rem 1.6rem 1.4rem;
+    max-height: 88vh;
+  }
+  .modal-hud-name {
+    font-size: 1.7rem;
+  }
+  .modal-hud-role {
+    font-size: 0.85rem;
+  }
+  .modal-hud-desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  .modal-back-btn {
+    padding: 0.85rem 1rem;
+    font-size: 0.78rem;
+  }
 }

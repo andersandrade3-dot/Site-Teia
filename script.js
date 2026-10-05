@@ -223,7 +223,7 @@ let triggerEnergyBurst = null;
   });
 
   window.addEventListener('mousedown', e => {
-    if (e.target.closest('a, button, input, iframe, .monolith, .crono-item, .escola-card')) return;
+    if (e.target.closest('a, button, input, iframe, .monolith, .crono-item, .escola-card, .crew-card, .crew-modal')) return;
     isDragging = true;
     prevMouseX = e.clientX;
     prevMouseY = e.clientY;
@@ -237,7 +237,7 @@ let triggerEnergyBurst = null;
 
   // Suporte a Toque Mobile e Tablet
   window.addEventListener('touchstart', e => {
-    if (e.target.closest('a, button, input, iframe, .monolith, .crono-item, .escola-card')) return;
+    if (e.target.closest('a, button, input, iframe, .monolith, .crono-item, .escola-card, .crew-card, .crew-modal')) return;
     isDragging = true;
     prevMouseX = e.touches[0].clientX;
     prevMouseY = e.touches[0].clientY;
@@ -255,6 +255,12 @@ let triggerEnergyBurst = null;
 
   window.addEventListener('touchend', () => {
     isDragging = false;
+    document.body.classList.remove('cursor-active');
+  });
+
+  window.addEventListener('touchcancel', () => {
+    isDragging = false;
+    document.body.classList.remove('cursor-active');
   });
 
   // Atualização do Progresso da Barra Lateral
@@ -365,12 +371,31 @@ let triggerEnergyBurst = null;
 
   animate();
 
-  // Resize Responsivo
+  // Resize Responsivo & Restauração de Contexto WebGL / BFCache
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  });
+
+  // Prevenir tela branca por perda de contexto WebGL no mobile
+  canvas.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault();
+  }, false);
+
+  canvas.addEventListener('webglcontextrestored', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.render(scene, camera);
+  }, false);
+
+  window.addEventListener('pageshow', (e) => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.render(scene, camera);
   });
 })();
 
@@ -482,40 +507,85 @@ let triggerEnergyBurst = null;
     });
   });
 
-  function openModal(id) {
+  function openModal(id, pushHistory = true) {
     const m = CREW.find(x => x.id === id);
     if (!m || !modal || !modalBody) return;
 
     modalBody.innerHTML = `
-      <div class="modal-badge">${m.id} &bull; ${m.cat.toUpperCase()}</div>
-      <h2 class="modal-name">${m.nome}</h2>
-      <p class="modal-role">${m.cargo}</p>
-      <div class="modal-divider"></div>
-      <p class="modal-desc">${m.desc}</p>
-      <div class="modal-loc"><strong>Local de Atuação:</strong> ${m.local}</div>
-      <div class="modal-school">EEMTI Maria Alice Ramos Gomes &bull; Técnico em Informática</div>
+      <div class="modal-hud-id">${m.id} &bull; ${m.cat.toUpperCase()}</div>
+      <h2 class="modal-hud-name">${m.nome}</h2>
+      <p class="modal-hud-role">${m.cargo}</p>
+      <div class="modal-hud-divider"></div>
+      <p class="modal-hud-desc">${m.desc}</p>
+      <div class="modal-hud-row">
+        <div class="modal-hud-lbl">Local de Atuação</div>
+        <div class="modal-hud-val">${m.local}</div>
+      </div>
+      <div class="modal-hud-school">EEMTI Maria Alice Ramos Gomes &bull; Técnico em Informática</div>
+      <button class="modal-back-btn" id="modalBackBtn" type="button">&larr; VOLTAR PARA O SITE</button>
     `;
 
     modal.hidden = false;
+    void modal.offsetWidth; // Força reflow para transição suave
     modal.classList.add('open');
-    if (modalX) modalX.focus();
+    document.body.classList.remove('cursor-active');
+    document.body.style.overflow = 'hidden';
+
+    const backBtn = $('#modalBackBtn', modalBody);
+    if (backBtn) {
+      backBtn.addEventListener('click', () => closeModal(true));
+      backBtn.focus();
+    } else if (modalX) {
+      modalX.focus();
+    }
+
+    if (pushHistory) {
+      try {
+        history.pushState({ modalOpen: true, studentId: id }, '', '#aluno-' + id);
+      } catch (err) {}
+    }
   }
 
-  function closeModal() {
-    if (!modal) return;
+  function closeModal(shouldPopHistory = true) {
+    if (!modal || modal.hidden) return;
     modal.classList.remove('open');
-    setTimeout(() => { modal.hidden = true; }, 300);
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      modal.hidden = true;
+    }, 250);
+
+    if (shouldPopHistory && window.location.hash.startsWith('#aluno-')) {
+      try {
+        history.back();
+      } catch (err) {
+        history.replaceState(null, '', window.location.pathname + '#equipe');
+      }
+    }
   }
 
-  if (modalX) modalX.addEventListener('click', closeModal);
+  if (modalX) modalX.addEventListener('click', () => closeModal(true));
   if (modal) {
     modal.addEventListener('click', e => {
-      if (e.target === modal) closeModal();
+      if (e.target === modal) closeModal(true);
     });
   }
 
   window.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal && !modal.hidden) closeModal();
+    if (e.key === 'Escape' && modal && !modal.hidden) closeModal(true);
+  });
+
+  // Interceptar botão voltar do celular/navegador para fechar o modal suavemente sem sair do site
+  window.addEventListener('popstate', () => {
+    if (modal && !modal.hidden) {
+      closeModal(false);
+    }
+  });
+
+  // Garantir que restaurar página (BFCache) não trave ou deixe modal aberto sem hash
+  window.addEventListener('pageshow', () => {
+    if (!window.location.hash.startsWith('#aluno-') && modal && !modal.hidden) {
+      closeModal(false);
+    }
   });
 
   // Toggle expansível dos alunos no mobile
@@ -528,12 +598,20 @@ let triggerEnergyBurst = null;
       crewToggleBtn.setAttribute('aria-expanded', isOpen);
       const textSpan = crewToggleBtn.querySelector('.crew-toggle-text');
       if (textSpan) {
-        textSpan.textContent = isOpen ? 'RECOLHER LISTA DE ALUNOS' : 'VER OS 31 ALUNOS DA EQUIPE';
+        textSpan.textContent = isOpen ? 'RECOLHER LISTA DE ALUNOS' : 'VER OS 39 ALUNOS DA EQUIPE';
       }
     });
   }
 
   render();
+
+  // Abrir modal automaticamente se o link contiver hash de aluno
+  if (window.location.hash.startsWith('#aluno-')) {
+    const targetId = window.location.hash.replace('#aluno-', '');
+    if (CREW.some(x => x.id === targetId)) {
+      openModal(targetId, false);
+    }
+  }
 })();
 
 /* ═════════════════════════════════════════════════════════════════════════
